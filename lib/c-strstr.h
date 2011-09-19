@@ -18,27 +18,9 @@
 /* The functions defined in this file assume a nearly ASCII compatible
    character set.  */
 
+#ifndef C_STRSTR_H
+#define C_STRSTR_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#define c_strstr(X, Y) strstr((X), (Y))
 
-/* Find the first occurrence of NEEDLE in HAYSTACK.
-   This function is safe to be called, even in a multibyte locale, if NEEDLE
-     1. consists solely of printable ASCII characters excluding '\\' and '~'
-        [this restriction is needed because of Shift_JIS and JOHAB]
-        or of the control ASCII characters '\a' '\b' '\f' '\n' '\r' '\t' '\v'
-        [this restriction is needed because of VISCII], and
-     2. has at least length 2
-        [this restriction is needed because of BIG5, BIG5-HKSCS, GBK, GB18030,
-         Shift_JIS, JOHAB], and
-     3. does not consist entirely of decimal digits, or has at least length 4
-        [this restricion is needed because of GB18030].
-   This function is also safe to be called, even in a multibyte locale, if
-   HAYSTACK and NEEDLE are known to both consist solely of printable ASCII
-   characters excluding '\\' and '~'.  */
-extern char *c_strstr (const char *haystack, const char *needle);
-
-#ifdef __cplusplus
-}
 #endif
