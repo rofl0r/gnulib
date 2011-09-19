@@ -145,25 +145,6 @@ _GL_WARN_ON_USE (atoll, "atoll is unportable - "
 # endif
 #endif
 
-#if @GNULIB_CALLOC_POSIX@
-# if @REPLACE_CALLOC@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef calloc
-#   define calloc rpl_calloc
-#  endif
-_GL_FUNCDECL_RPL (calloc, void *, (size_t nmemb, size_t size));
-_GL_CXXALIAS_RPL (calloc, void *, (size_t nmemb, size_t size));
-# else
-_GL_CXXALIAS_SYS (calloc, void *, (size_t nmemb, size_t size));
-# endif
-_GL_CXXALIASWARN (calloc);
-#elif defined GNULIB_POSIXCHECK
-# undef calloc
-/* Assume calloc is always declared.  */
-_GL_WARN_ON_USE (calloc, "calloc is not POSIX compliant everywhere - "
-                 "use gnulib module calloc-posix for portability");
-#endif
-
 #if @GNULIB_CANONICALIZE_FILE_NAME@
 # if @REPLACE_CANONICALIZE_FILE_NAME@
 #  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
