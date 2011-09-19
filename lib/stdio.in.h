@@ -804,65 +804,6 @@ _GL_CXXALIAS_SYS (scanf, int, (const char *format, ...));
 _GL_CXXALIASWARN (scanf);
 #endif
 
-#if @GNULIB_SNPRINTF@
-# if @REPLACE_SNPRINTF@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define snprintf rpl_snprintf
-#  endif
-_GL_FUNCDECL_RPL (snprintf, int,
-                  (char *str, size_t size, const char *format, ...)
-                  _GL_ATTRIBUTE_FORMAT_PRINTF (3, 4)
-                  _GL_ARG_NONNULL ((3)));
-_GL_CXXALIAS_RPL (snprintf, int,
-                  (char *str, size_t size, const char *format, ...));
-# else
-#  if !@HAVE_DECL_SNPRINTF@
-_GL_FUNCDECL_SYS (snprintf, int,
-                  (char *str, size_t size, const char *format, ...)
-                  _GL_ATTRIBUTE_FORMAT_PRINTF (3, 4)
-                  _GL_ARG_NONNULL ((3)));
-#  endif
-_GL_CXXALIAS_SYS (snprintf, int,
-                  (char *str, size_t size, const char *format, ...));
-# endif
-_GL_CXXALIASWARN (snprintf);
-#elif defined GNULIB_POSIXCHECK
-# undef snprintf
-# if HAVE_RAW_DECL_SNPRINTF
-_GL_WARN_ON_USE (snprintf, "snprintf is unportable - "
-                 "use gnulib module snprintf for portability");
-# endif
-#endif
-
-/* Some people would argue that sprintf should be handled like gets
-   (for example, OpenBSD issues a link warning for both functions),
-   since both can cause security holes due to buffer overruns.
-   However, we believe that sprintf can be used safely, and is more
-   efficient than snprintf in those safe cases; and as proof of our
-   belief, we use sprintf in several gnulib modules.  So this header
-   intentionally avoids adding a warning to sprintf except when
-   GNULIB_POSIXCHECK is defined.  */
-
-#if @GNULIB_SPRINTF_POSIX@
-# if @REPLACE_SPRINTF@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define sprintf rpl_sprintf
-#  endif
-_GL_FUNCDECL_RPL (sprintf, int, (char *str, const char *format, ...)
-                                _GL_ATTRIBUTE_FORMAT_PRINTF (2, 3)
-                                _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (sprintf, int, (char *str, const char *format, ...));
-# else
-_GL_CXXALIAS_SYS (sprintf, int, (char *str, const char *format, ...));
-# endif
-_GL_CXXALIASWARN (sprintf);
-#elif defined GNULIB_POSIXCHECK
-# undef sprintf
-/* Assume sprintf is always declared.  */
-_GL_WARN_ON_USE (sprintf, "sprintf is not always POSIX compliant - "
-                 "use gnulib module sprintf-posix for portable "
-                 "POSIX compliance");
-#endif
 
 #if @GNULIB_TMPFILE@
 # if @REPLACE_TMPFILE@

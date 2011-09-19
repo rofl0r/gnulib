@@ -1173,34 +1173,6 @@ _GL_WARN_ON_USE (rmdir, "rmdir is unportable - "
 #endif
 
 
-#if @GNULIB_SLEEP@
-/* Pause the execution of the current thread for N seconds.
-   Returns the number of seconds left to sleep.
-   See the POSIX:2008 specification
-   <http://pubs.opengroup.org/onlinepubs/9699919799/functions/sleep.html>.  */
-# if @REPLACE_SLEEP@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef sleep
-#   define sleep rpl_sleep
-#  endif
-_GL_FUNCDECL_RPL (sleep, unsigned int, (unsigned int n));
-_GL_CXXALIAS_RPL (sleep, unsigned int, (unsigned int n));
-# else
-#  if !@HAVE_SLEEP@
-_GL_FUNCDECL_SYS (sleep, unsigned int, (unsigned int n));
-#  endif
-_GL_CXXALIAS_SYS (sleep, unsigned int, (unsigned int n));
-# endif
-_GL_CXXALIASWARN (sleep);
-#elif defined GNULIB_POSIXCHECK
-# undef sleep
-# if HAVE_RAW_DECL_SLEEP
-_GL_WARN_ON_USE (sleep, "sleep is unportable - "
-                 "use gnulib module sleep for portability");
-# endif
-#endif
-
-
 #if @GNULIB_SYMLINK@
 # if @REPLACE_SYMLINK@
 #  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
@@ -1349,27 +1321,6 @@ _GL_WARN_ON_USE (usleep, "usleep is unportable - "
 # endif
 #endif
 
-
-#if @GNULIB_WRITE@
-/* Write up to COUNT bytes starting at BUF to file descriptor FD.
-   See the POSIX:2008 specification
-   <http://pubs.opengroup.org/onlinepubs/9699919799/functions/write.html>.  */
-# if @REPLACE_WRITE@ && (@GNULIB_UNISTD_H_NONBLOCKING@ || @GNULIB_UNISTD_H_SIGPIPE@)
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef write
-#   define write rpl_write
-#  endif
-_GL_FUNCDECL_RPL (write, ssize_t, (int fd, const void *buf, size_t count)
-                                  _GL_ARG_NONNULL ((2)));
-_GL_CXXALIAS_RPL (write, ssize_t, (int fd, const void *buf, size_t count));
-# else
-/* Need to cast, because on mingw, the third parameter is
-                                                             unsigned int count
-   and the return type is 'int'.  */
-_GL_CXXALIAS_SYS_CAST (write, ssize_t, (int fd, const void *buf, size_t count));
-# endif
-_GL_CXXALIASWARN (write);
-#endif
 
 
 #endif /* _@GUARD_PREFIX@_UNISTD_H */
