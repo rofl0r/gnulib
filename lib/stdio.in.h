@@ -151,24 +151,6 @@ _GL_WARN_ON_USE (dprintf, "dprintf is unportable - "
 # endif
 #endif
 
-#if @GNULIB_FCLOSE@
-/* Close STREAM and its underlying file descriptor.  */
-# if @REPLACE_FCLOSE@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define fclose rpl_fclose
-#  endif
-_GL_FUNCDECL_RPL (fclose, int, (FILE *stream) _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (fclose, int, (FILE *stream));
-# else
-_GL_CXXALIAS_SYS (fclose, int, (FILE *stream));
-# endif
-_GL_CXXALIASWARN (fclose);
-#elif defined GNULIB_POSIXCHECK
-# undef fclose
-/* Assume fclose is always declared.  */
-_GL_WARN_ON_USE (fclose, "fclose is not always POSIX compliant - "
-                 "use gnulib module fclose for portable POSIX compliance");
-#endif
 
 #if @GNULIB_FFLUSH@
 /* Flush all pending data on STREAM according to POSIX rules.  Both
