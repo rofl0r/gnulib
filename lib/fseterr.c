@@ -45,7 +45,7 @@ fseterr (FILE *fp)
   fp->_Mode |= 0x200 /* _MERR */;
 #elif defined __MINT__              /* Atari FreeMiNT */
   fp->__error = 1;
-#elif 0                             /* unknown  */
+#elif 1                             /* unknown  */
   /* Portable fallback, based on an idea by Rich Felker.
      Wow! 6 system calls for something that is just a bit operation!
      Not activated on any system, because there is no way to repair FP when
