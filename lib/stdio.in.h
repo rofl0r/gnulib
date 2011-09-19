@@ -1147,62 +1147,6 @@ _GL_CXXALIAS_SYS (vscanf, int, (const char *format, va_list args));
 _GL_CXXALIASWARN (vscanf);
 #endif
 
-#if @GNULIB_VSNPRINTF@
-# if @REPLACE_VSNPRINTF@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define vsnprintf rpl_vsnprintf
-#  endif
-_GL_FUNCDECL_RPL (vsnprintf, int,
-                  (char *str, size_t size, const char *format, va_list args)
-                  _GL_ATTRIBUTE_FORMAT_PRINTF (3, 0)
-                  _GL_ARG_NONNULL ((3)));
-_GL_CXXALIAS_RPL (vsnprintf, int,
-                  (char *str, size_t size, const char *format, va_list args));
-# else
-#  if !@HAVE_DECL_VSNPRINTF@
-_GL_FUNCDECL_SYS (vsnprintf, int,
-                  (char *str, size_t size, const char *format, va_list args)
-                  _GL_ATTRIBUTE_FORMAT_PRINTF (3, 0)
-                  _GL_ARG_NONNULL ((3)));
-#  endif
-_GL_CXXALIAS_SYS (vsnprintf, int,
-                  (char *str, size_t size, const char *format, va_list args));
-# endif
-_GL_CXXALIASWARN (vsnprintf);
-#elif defined GNULIB_POSIXCHECK
-# undef vsnprintf
-# if HAVE_RAW_DECL_VSNPRINTF
-_GL_WARN_ON_USE (vsnprintf, "vsnprintf is unportable - "
-                 "use gnulib module vsnprintf for portability");
-# endif
-#endif
-
-#if @GNULIB_VSPRINTF_POSIX@
-# if @REPLACE_VSPRINTF@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define vsprintf rpl_vsprintf
-#  endif
-_GL_FUNCDECL_RPL (vsprintf, int,
-                  (char *str, const char *format, va_list args)
-                  _GL_ATTRIBUTE_FORMAT_PRINTF (2, 0)
-                  _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (vsprintf, int,
-                  (char *str, const char *format, va_list args));
-# else
-/* Need to cast, because on Solaris, the third parameter is
-                                                       __va_list args
-   and GCC's fixincludes did not change this to __gnuc_va_list.  */
-_GL_CXXALIAS_SYS_CAST (vsprintf, int,
-                       (char *str, const char *format, va_list args));
-# endif
-_GL_CXXALIASWARN (vsprintf);
-#elif defined GNULIB_POSIXCHECK
-# undef vsprintf
-/* Assume vsprintf is always declared.  */
-_GL_WARN_ON_USE (vsprintf, "vsprintf is not always POSIX compliant - "
-                 "use gnulib module vsprintf-posix for portable "
-                      "POSIX compliance");
-#endif
 
 
 #endif /* _@GUARD_PREFIX@_STDIO_H */
