@@ -306,33 +306,6 @@ _GL_WARN_ON_USE (strchrnul, "strchrnul is unportable - "
 # endif
 #endif
 
-/* Duplicate S, returning an identical malloc'd string.  */
-#if @GNULIB_STRDUP@
-# if @REPLACE_STRDUP@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef strdup
-#   define strdup rpl_strdup
-#  endif
-_GL_FUNCDECL_RPL (strdup, char *, (char const *__s) _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (strdup, char *, (char const *__s));
-# else
-#  if defined __cplusplus && defined GNULIB_NAMESPACE && defined strdup
-    /* strdup exists as a function and as a macro.  Get rid of the macro.  */
-#   undef strdup
-#  endif
-#  if !(@HAVE_DECL_STRDUP@ || defined strdup)
-_GL_FUNCDECL_SYS (strdup, char *, (char const *__s) _GL_ARG_NONNULL ((1)));
-#  endif
-_GL_CXXALIAS_SYS (strdup, char *, (char const *__s));
-# endif
-_GL_CXXALIASWARN (strdup);
-#elif defined GNULIB_POSIXCHECK
-# undef strdup
-# if HAVE_RAW_DECL_STRDUP
-_GL_WARN_ON_USE (strdup, "strdup is unportable - "
-                 "use gnulib module strdup for portability");
-# endif
-#endif
 
 /* Append no more than N characters from SRC onto DEST.  */
 #if @GNULIB_STRNCAT@
