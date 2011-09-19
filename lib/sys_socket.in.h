@@ -477,29 +477,6 @@ _GL_WARN_ON_USE (listen, "listen is not always POSIX compliant - "
 # endif
 #endif
 
-#if @GNULIB_RECV@
-# if @HAVE_WINSOCK2_H@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef recv
-#   define recv rpl_recv
-#  endif
-_GL_FUNCDECL_RPL (recv, ssize_t, (int fd, void *buf, size_t len, int flags)
-                                 _GL_ARG_NONNULL ((2)));
-_GL_CXXALIAS_RPL (recv, ssize_t, (int fd, void *buf, size_t len, int flags));
-# else
-_GL_CXXALIAS_SYS (recv, ssize_t, (int fd, void *buf, size_t len, int flags));
-# endif
-_GL_CXXALIASWARN (recv);
-#elif @HAVE_WINSOCK2_H@
-# undef recv
-# define recv recv_used_without_requesting_gnulib_module_recv
-#elif defined GNULIB_POSIXCHECK
-# undef recv
-# if HAVE_RAW_DECL_RECV
-_GL_WARN_ON_USE (recv, "recv is not always POSIX compliant - "
-                 "use gnulib module recv for portability");
-# endif
-#endif
 
 #if @GNULIB_RECVFROM@
 # if @HAVE_WINSOCK2_H@
