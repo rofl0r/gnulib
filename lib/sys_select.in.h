@@ -252,31 +252,6 @@ _GL_WARN_ON_USE (pselect, "pselect is not portable - "
 # endif
 #endif
 
-#if @GNULIB_SELECT@
-# if @REPLACE_SELECT@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef select
-#   define select rpl_select
-#  endif
-_GL_FUNCDECL_RPL (select, int,
-                  (int, fd_set *, fd_set *, fd_set *, struct timeval *));
-_GL_CXXALIAS_RPL (select, int,
-                  (int, fd_set *, fd_set *, fd_set *, struct timeval *));
-# else
-_GL_CXXALIAS_SYS (select, int,
-                  (int, fd_set *, fd_set *, fd_set *, struct timeval *));
-# endif
-_GL_CXXALIASWARN (select);
-#elif @HAVE_WINSOCK2_H@
-# undef select
-# define select select_used_without_requesting_gnulib_module_select
-#elif defined GNULIB_POSIXCHECK
-# undef select
-# if HAVE_RAW_DECL_SELECT
-_GL_WARN_ON_USE (select, "select is not always POSIX compliant - "
-                 "use gnulib module select for portability");
-# endif
-#endif
 
 
 #endif /* _@GUARD_PREFIX@_SYS_SELECT_H */
