@@ -533,37 +533,6 @@ _GL_WARN_ON_USE (recvfrom, "recvfrom is not always POSIX compliant - "
 # endif
 #endif
 
-#if @GNULIB_SENDTO@
-# if @HAVE_WINSOCK2_H@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef sendto
-#   define sendto rpl_sendto
-#  endif
-_GL_FUNCDECL_RPL (sendto, ssize_t,
-                  (int fd, const void *buf, size_t len, int flags,
-                   const struct sockaddr *to, socklen_t tolen)
-                  _GL_ARG_NONNULL ((2)));
-_GL_CXXALIAS_RPL (sendto, ssize_t,
-                  (int fd, const void *buf, size_t len, int flags,
-                   const struct sockaddr *to, socklen_t tolen));
-# else
-/* Need to cast, because on NonStop Kernel, the sixth parameter is
-                                                   size_t tolen.  */
-_GL_CXXALIAS_SYS_CAST (sendto, ssize_t,
-                       (int fd, const void *buf, size_t len, int flags,
-                        const struct sockaddr *to, socklen_t tolen));
-# endif
-_GL_CXXALIASWARN (sendto);
-#elif @HAVE_WINSOCK2_H@
-# undef sendto
-# define sendto sendto_used_without_requesting_gnulib_module_sendto
-#elif defined GNULIB_POSIXCHECK
-# undef sendto
-# if HAVE_RAW_DECL_SENDTO
-_GL_WARN_ON_USE (sendto, "sendto is not always POSIX compliant - "
-                 "use gnulib module sendto for portability");
-# endif
-#endif
 
 #if @GNULIB_SETSOCKOPT@
 # if @HAVE_WINSOCK2_H@
