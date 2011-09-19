@@ -420,20 +420,6 @@ _GL_WARN_ON_USE (ptsname, "ptsname is not portable - "
 # endif
 #endif
 
-#if @GNULIB_PUTENV@
-# if @REPLACE_PUTENV@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef putenv
-#   define putenv rpl_putenv
-#  endif
-_GL_FUNCDECL_RPL (putenv, int, (char *string) _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (putenv, int, (char *string));
-# else
-_GL_CXXALIAS_SYS (putenv, int, (char *string));
-# endif
-_GL_CXXALIASWARN (putenv);
-#endif
-
 
 #if @GNULIB_RANDOM_R@
 # if !@HAVE_RANDOM_R@
