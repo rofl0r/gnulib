@@ -89,44 +89,6 @@ _GL_WARN_ON_USE (ffsll, "ffsll is not portable - use the ffsll module");
 #endif
 
 
-/* Return the first instance of C within N bytes of S, or NULL.  */
-#if @GNULIB_MEMCHR@
-# if @REPLACE_MEMCHR@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define memchr rpl_memchr
-#  endif
-_GL_FUNCDECL_RPL (memchr, void *, (void const *__s, int __c, size_t __n)
-                                  _GL_ATTRIBUTE_PURE
-                                  _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (memchr, void *, (void const *__s, int __c, size_t __n));
-# else
-#  if ! @HAVE_MEMCHR@
-_GL_FUNCDECL_SYS (memchr, void *, (void const *__s, int __c, size_t __n)
-                                  _GL_ATTRIBUTE_PURE
-                                  _GL_ARG_NONNULL ((1)));
-#  endif
-  /* On some systems, this function is defined as an overloaded function:
-       extern "C" { const void * std::memchr (const void *, int, size_t); }
-       extern "C++" { void * std::memchr (void *, int, size_t); }  */
-_GL_CXXALIAS_SYS_CAST2 (memchr,
-                        void *, (void const *__s, int __c, size_t __n),
-                        void const *, (void const *__s, int __c, size_t __n));
-# endif
-# if ((__GLIBC__ == 2 && __GLIBC_MINOR__ >= 10) && !defined __UCLIBC__) \
-     && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))
-_GL_CXXALIASWARN1 (memchr, void *, (void *__s, int __c, size_t __n));
-_GL_CXXALIASWARN1 (memchr, void const *,
-                   (void const *__s, int __c, size_t __n));
-# else
-_GL_CXXALIASWARN (memchr);
-# endif
-#elif defined GNULIB_POSIXCHECK
-# undef memchr
-/* Assume memchr is always declared.  */
-_GL_WARN_ON_USE (memchr, "memchr has platform-specific bugs - "
-                 "use gnulib module memchr for portability" );
-#endif
-
 /* Return the first occurrence of NEEDLE in HAYSTACK.  */
 #if @GNULIB_MEMMEM@
 # if @REPLACE_MEMMEM@
