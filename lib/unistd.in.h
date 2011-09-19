@@ -1099,27 +1099,6 @@ _GL_WARN_ON_USE (pwrite, "pwrite is unportable - "
 #endif
 
 
-#if @GNULIB_READ@
-/* Read up to COUNT bytes from file descriptor FD into the buffer starting
-   at BUF.  See the POSIX:2008 specification
-   <http://pubs.opengroup.org/onlinepubs/9699919799/functions/read.html>.  */
-# if @REPLACE_READ@ && @GNULIB_UNISTD_H_NONBLOCKING@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef read
-#   define read rpl_read
-#  endif
-_GL_FUNCDECL_RPL (read, ssize_t, (int fd, void *buf, size_t count)
-                                 _GL_ARG_NONNULL ((2)));
-_GL_CXXALIAS_RPL (read, ssize_t, (int fd, void *buf, size_t count));
-# else
-/* Need to cast, because on mingw, the third parameter is
-                                                          unsigned int count
-   and the return type is 'int'.  */
-_GL_CXXALIAS_SYS_CAST (read, ssize_t, (int fd, void *buf, size_t count));
-# endif
-_GL_CXXALIASWARN (read);
-#endif
-
 
 #if @GNULIB_READLINK@
 /* Read the contents of the symbolic link FILE and place the first BUFSIZE
