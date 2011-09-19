@@ -501,33 +501,6 @@ _GL_WARN_ON_USE (recv, "recv is not always POSIX compliant - "
 # endif
 #endif
 
-#if @GNULIB_SEND@
-# if @HAVE_WINSOCK2_H@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef send
-#   define send rpl_send
-#  endif
-_GL_FUNCDECL_RPL (send, ssize_t,
-                  (int fd, const void *buf, size_t len, int flags)
-                  _GL_ARG_NONNULL ((2)));
-_GL_CXXALIAS_RPL (send, ssize_t,
-                  (int fd, const void *buf, size_t len, int flags));
-# else
-_GL_CXXALIAS_SYS (send, ssize_t,
-                  (int fd, const void *buf, size_t len, int flags));
-# endif
-_GL_CXXALIASWARN (send);
-#elif @HAVE_WINSOCK2_H@
-# undef send
-# define send send_used_without_requesting_gnulib_module_send
-#elif defined GNULIB_POSIXCHECK
-# undef send
-# if HAVE_RAW_DECL_SEND
-_GL_WARN_ON_USE (send, "send is not always POSIX compliant - "
-                 "use gnulib module send for portability");
-# endif
-#endif
-
 #if @GNULIB_RECVFROM@
 # if @HAVE_WINSOCK2_H@
 #  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
