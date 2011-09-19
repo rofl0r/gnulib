@@ -478,38 +478,6 @@ _GL_WARN_ON_USE (listen, "listen is not always POSIX compliant - "
 #endif
 
 
-#if @GNULIB_RECVFROM@
-# if @HAVE_WINSOCK2_H@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef recvfrom
-#   define recvfrom rpl_recvfrom
-#  endif
-_GL_FUNCDECL_RPL (recvfrom, ssize_t,
-                  (int fd, void *buf, size_t len, int flags,
-                   struct sockaddr *from, socklen_t *fromlen)
-                  _GL_ARG_NONNULL ((2)));
-_GL_CXXALIAS_RPL (recvfrom, ssize_t,
-                  (int fd, void *buf, size_t len, int flags,
-                   struct sockaddr *from, socklen_t *fromlen));
-# else
-/* Need to cast, because on Solaris 10 systems, the sixth parameter is
-                                               void *fromlen.  */
-_GL_CXXALIAS_SYS_CAST (recvfrom, ssize_t,
-                       (int fd, void *buf, size_t len, int flags,
-                        struct sockaddr *from, socklen_t *fromlen));
-# endif
-_GL_CXXALIASWARN (recvfrom);
-#elif @HAVE_WINSOCK2_H@
-# undef recvfrom
-# define recvfrom recvfrom_used_without_requesting_gnulib_module_recvfrom
-#elif defined GNULIB_POSIXCHECK
-# undef recvfrom
-# if HAVE_RAW_DECL_RECVFROM
-_GL_WARN_ON_USE (recvfrom, "recvfrom is not always POSIX compliant - "
-                 "use gnulib module recvfrom for portability");
-# endif
-#endif
-
 
 #if @GNULIB_SETSOCKOPT@
 # if @HAVE_WINSOCK2_H@
