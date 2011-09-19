@@ -21,6 +21,8 @@
 #ifndef C_STRSTR_H
 #define C_STRSTR_H
 
+#include <string.h>
+
 #define c_strstr(X, Y) strstr((X), (Y))
 
 #endif
