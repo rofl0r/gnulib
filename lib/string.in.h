@@ -473,44 +473,6 @@ _GL_WARN_ON_USE (strsep, "strsep is unportable - "
 # endif
 #endif
 
-#if @GNULIB_STRSTR@
-# if @REPLACE_STRSTR@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define strstr rpl_strstr
-#  endif
-_GL_FUNCDECL_RPL (strstr, char *, (const char *haystack, const char *needle)
-                                  _GL_ATTRIBUTE_PURE
-                                  _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (strstr, char *, (const char *haystack, const char *needle));
-# else
-  /* On some systems, this function is defined as an overloaded function:
-       extern "C++" { const char * strstr (const char *, const char *); }
-       extern "C++" { char * strstr (char *, const char *); }  */
-_GL_CXXALIAS_SYS_CAST2 (strstr,
-                        char *, (const char *haystack, const char *needle),
-                        const char *, (const char *haystack, const char *needle));
-# endif
-# if ((__GLIBC__ == 2 && __GLIBC_MINOR__ >= 10) && !defined __UCLIBC__) \
-     && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))
-_GL_CXXALIASWARN1 (strstr, char *, (char *haystack, const char *needle));
-_GL_CXXALIASWARN1 (strstr, const char *,
-                   (const char *haystack, const char *needle));
-# else
-_GL_CXXALIASWARN (strstr);
-# endif
-#elif defined GNULIB_POSIXCHECK
-/* strstr() does not work with multibyte strings if the locale encoding is
-   different from UTF-8:
-   POSIX says that it operates on "strings", and "string" in POSIX is defined
-   as a sequence of bytes, not of characters.  */
-# undef strstr
-/* Assume strstr is always declared.  */
-_GL_WARN_ON_USE (strstr, "strstr is quadratic on many systems, and cannot "
-                 "work correctly on character strings in most "
-                 "multibyte locales - "
-                 "use mbsstr if you care about internationalization, "
-                 "or use strstr if you care about speed");
-#endif
 
 /* Find the first occurrence of NEEDLE in HAYSTACK, using case-insensitive
    comparison.  */
