@@ -299,34 +299,6 @@ _GL_CXXALIAS_SYS (dup, int, (int oldfd));
 _GL_CXXALIASWARN (dup);
 
 
-#if @GNULIB_DUP2@
-/* Copy the file descriptor OLDFD into file descriptor NEWFD.  Do nothing if
-   NEWFD = OLDFD, otherwise close NEWFD first if it is open.
-   Return newfd if successful, otherwise -1 and errno set.
-   See the POSIX:2008 specification
-   <http://pubs.opengroup.org/onlinepubs/9699919799/functions/dup2.html>.  */
-# if @REPLACE_DUP2@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define dup2 rpl_dup2
-#  endif
-_GL_FUNCDECL_RPL (dup2, int, (int oldfd, int newfd));
-_GL_CXXALIAS_RPL (dup2, int, (int oldfd, int newfd));
-# else
-#  if !@HAVE_DUP2@
-_GL_FUNCDECL_SYS (dup2, int, (int oldfd, int newfd));
-#  endif
-_GL_CXXALIAS_SYS (dup2, int, (int oldfd, int newfd));
-# endif
-_GL_CXXALIASWARN (dup2);
-#elif defined GNULIB_POSIXCHECK
-# undef dup2
-# if HAVE_RAW_DECL_DUP2
-_GL_WARN_ON_USE (dup2, "dup2 is unportable - "
-                 "use gnulib module dup2 for portability");
-# endif
-#endif
-
-
 #if @GNULIB_DUP3@
 /* Copy the file descriptor OLDFD into file descriptor NEWFD, with the
    specified flags.
@@ -1006,30 +978,6 @@ _GL_CXXALIASWARN (linkat);
 # if HAVE_RAW_DECL_LINKAT
 _GL_WARN_ON_USE (linkat, "linkat is unportable - "
                  "use gnulib module linkat for portability");
-# endif
-#endif
-
-
-#if @GNULIB_LSEEK@
-/* Set the offset of FD relative to SEEK_SET, SEEK_CUR, or SEEK_END.
-   Return the new offset if successful, otherwise -1 and errno set.
-   See the POSIX:2008 specification
-   <http://pubs.opengroup.org/onlinepubs/9699919799/functions/lseek.html>.  */
-# if @REPLACE_LSEEK@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define lseek rpl_lseek
-#  endif
-_GL_FUNCDECL_RPL (lseek, off_t, (int fd, off_t offset, int whence));
-_GL_CXXALIAS_RPL (lseek, off_t, (int fd, off_t offset, int whence));
-# else
-_GL_CXXALIAS_SYS (lseek, off_t, (int fd, off_t offset, int whence));
-# endif
-_GL_CXXALIASWARN (lseek);
-#elif defined GNULIB_POSIXCHECK
-# undef lseek
-# if HAVE_RAW_DECL_LSEEK
-_GL_WARN_ON_USE (lseek, "lseek does not fail with ESPIPE on pipes on some "
-                 "systems - use gnulib module lseek for portability");
 # endif
 #endif
 
