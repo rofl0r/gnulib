@@ -56,36 +56,6 @@
    and eglibc 2.11.2.  */
 #include <sys/types.h>
 
-/* The __attribute__ feature is available in gcc versions 2.5 and later.
-   The __-protected variants of the attributes 'format' and 'printf' are
-   accepted by gcc versions 2.6.4 (effectively 2.7) and later.
-   We enable _GL_ATTRIBUTE_FORMAT only if these are supported too, because
-   gnulib and libintl do '#define printf __printf__' when they override
-   the 'printf' function.  */
-#if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)
-# define _GL_ATTRIBUTE_FORMAT(spec) __attribute__ ((__format__ spec))
-#else
-# define _GL_ATTRIBUTE_FORMAT(spec) /* empty */
-#endif
-
-/* _GL_ATTRIBUTE_FORMAT_PRINTF
-   indicates to GCC that the function takes a format string and arguments,
-   where the format string directives are the ones standardized by ISO C99
-   and POSIX.  */
-#if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4)
-# define _GL_ATTRIBUTE_FORMAT_PRINTF(formatstring_parameter, first_argument) \
-   _GL_ATTRIBUTE_FORMAT ((__gnu_printf__, formatstring_parameter, first_argument))
-#else
-# define _GL_ATTRIBUTE_FORMAT_PRINTF(formatstring_parameter, first_argument) \
-   _GL_ATTRIBUTE_FORMAT ((__printf__, formatstring_parameter, first_argument))
-#endif
-
-/* _GL_ATTRIBUTE_FORMAT_PRINTF_SYSTEM is like _GL_ATTRIBUTE_FORMAT_PRINTF,
-   except that it indicates to GCC that the supported format string directives
-   are the ones of the system printf(), rather than the ones standardized by
-   ISO C99 and POSIX.  */
-#define _GL_ATTRIBUTE_FORMAT_PRINTF_SYSTEM(formatstring_parameter, first_argument) \
-  _GL_ATTRIBUTE_FORMAT ((__printf__, formatstring_parameter, first_argument))
 
 /* _GL_ATTRIBUTE_FORMAT_SCANF
    indicates to GCC that the function takes a format string and arguments,
