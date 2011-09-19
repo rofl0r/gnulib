@@ -206,37 +206,6 @@ _GL_CXXALIASWARN (fgets);
 #endif
 
 
-#if @GNULIB_FPRINTF_POSIX@ || @GNULIB_FPRINTF@
-# if (@GNULIB_FPRINTF_POSIX@ && @REPLACE_FPRINTF@) \
-     || (@GNULIB_FPRINTF@ && @REPLACE_STDIO_WRITE_FUNCS@ && (@GNULIB_STDIO_H_NONBLOCKING@ || @GNULIB_STDIO_H_SIGPIPE@))
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define fprintf rpl_fprintf
-#  endif
-#  define GNULIB_overrides_fprintf 1
-#  if @GNULIB_FPRINTF_POSIX@ || @GNULIB_VFPRINTF_POSIX@
-_GL_FUNCDECL_RPL (fprintf, int, (FILE *fp, const char *format, ...)
-                                _GL_ATTRIBUTE_FORMAT_PRINTF (2, 3)
-                                _GL_ARG_NONNULL ((1, 2)));
-#  else
-_GL_FUNCDECL_RPL (fprintf, int, (FILE *fp, const char *format, ...)
-                                _GL_ATTRIBUTE_FORMAT_PRINTF_SYSTEM (2, 3)
-                                _GL_ARG_NONNULL ((1, 2)));
-#  endif
-_GL_CXXALIAS_RPL (fprintf, int, (FILE *fp, const char *format, ...));
-# else
-_GL_CXXALIAS_SYS (fprintf, int, (FILE *fp, const char *format, ...));
-# endif
-_GL_CXXALIASWARN (fprintf);
-#endif
-#if !@GNULIB_FPRINTF_POSIX@ && defined GNULIB_POSIXCHECK
-# if !GNULIB_overrides_fprintf
-#  undef fprintf
-# endif
-/* Assume fprintf is always declared.  */
-_GL_WARN_ON_USE (fprintf, "fprintf is not always POSIX compliant - "
-                 "use gnulib module fprintf-posix for portable "
-                 "POSIX compliance");
-#endif
 
 #if @GNULIB_FPURGE@
 /* Discard all pending buffered I/O data on STREAM.
@@ -690,55 +659,6 @@ _GL_WARN_ON_USE (popen, "popen is buggy on some platforms - "
 # endif
 #endif
 
-#if @GNULIB_PRINTF_POSIX@ || @GNULIB_PRINTF@
-# if (@GNULIB_PRINTF_POSIX@ && @REPLACE_PRINTF@) \
-     || (@GNULIB_PRINTF@ && @REPLACE_STDIO_WRITE_FUNCS@ && (@GNULIB_STDIO_H_NONBLOCKING@ || @GNULIB_STDIO_H_SIGPIPE@))
-#  if defined __GNUC__
-#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-/* Don't break __attribute__((format(printf,M,N))).  */
-#    define printf __printf__
-#   endif
-#   if @GNULIB_PRINTF_POSIX@ || @GNULIB_VFPRINTF_POSIX@
-_GL_FUNCDECL_RPL_1 (__printf__, int,
-                    (const char *format, ...)
-                    __asm__ (@ASM_SYMBOL_PREFIX@
-                             _GL_STDIO_MACROEXPAND_AND_STRINGIZE(rpl_printf))
-                    _GL_ATTRIBUTE_FORMAT_PRINTF (1, 2)
-                    _GL_ARG_NONNULL ((1)));
-#   else
-_GL_FUNCDECL_RPL_1 (__printf__, int,
-                    (const char *format, ...)
-                    __asm__ (@ASM_SYMBOL_PREFIX@
-                             _GL_STDIO_MACROEXPAND_AND_STRINGIZE(rpl_printf))
-                    _GL_ATTRIBUTE_FORMAT_PRINTF_SYSTEM (1, 2)
-                    _GL_ARG_NONNULL ((1)));
-#   endif
-_GL_CXXALIAS_RPL_1 (printf, __printf__, int, (const char *format, ...));
-#  else
-#   if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#    define printf rpl_printf
-#   endif
-_GL_FUNCDECL_RPL (printf, int,
-                  (const char *format, ...)
-                  _GL_ATTRIBUTE_FORMAT_PRINTF (1, 2)
-                  _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (printf, int, (const char *format, ...));
-#  endif
-#  define GNULIB_overrides_printf 1
-# else
-_GL_CXXALIAS_SYS (printf, int, (const char *format, ...));
-# endif
-_GL_CXXALIASWARN (printf);
-#endif
-#if !@GNULIB_PRINTF_POSIX@ && defined GNULIB_POSIXCHECK
-# if !GNULIB_overrides_printf
-#  undef printf
-# endif
-/* Assume printf is always declared.  */
-_GL_WARN_ON_USE (printf, "printf is not always POSIX compliant - "
-                 "use gnulib module printf-posix for portable "
-                 "POSIX compliance");
-#endif
 
 #if @GNULIB_PUTC@
 # if @REPLACE_STDIO_WRITE_FUNCS@ && (@GNULIB_STDIO_H_NONBLOCKING@ || @GNULIB_STDIO_H_SIGPIPE@)
@@ -1041,41 +961,6 @@ _GL_WARN_ON_USE (vdprintf, "vdprintf is unportable - "
 # endif
 #endif
 
-#if @GNULIB_VFPRINTF_POSIX@ || @GNULIB_VFPRINTF@
-# if (@GNULIB_VFPRINTF_POSIX@ && @REPLACE_VFPRINTF@) \
-     || (@GNULIB_VFPRINTF@ && @REPLACE_STDIO_WRITE_FUNCS@ && (@GNULIB_STDIO_H_NONBLOCKING@ || @GNULIB_STDIO_H_SIGPIPE@))
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define vfprintf rpl_vfprintf
-#  endif
-#  define GNULIB_overrides_vfprintf 1
-#  if @GNULIB_VFPRINTF_POSIX@
-_GL_FUNCDECL_RPL (vfprintf, int, (FILE *fp, const char *format, va_list args)
-                                 _GL_ATTRIBUTE_FORMAT_PRINTF (2, 0)
-                                 _GL_ARG_NONNULL ((1, 2)));
-#  else
-_GL_FUNCDECL_RPL (vfprintf, int, (FILE *fp, const char *format, va_list args)
-                                 _GL_ATTRIBUTE_FORMAT_PRINTF_SYSTEM (2, 0)
-                                 _GL_ARG_NONNULL ((1, 2)));
-#  endif
-_GL_CXXALIAS_RPL (vfprintf, int, (FILE *fp, const char *format, va_list args));
-# else
-/* Need to cast, because on Solaris, the third parameter is
-                                                      __va_list args
-   and GCC's fixincludes did not change this to __gnuc_va_list.  */
-_GL_CXXALIAS_SYS_CAST (vfprintf, int,
-                       (FILE *fp, const char *format, va_list args));
-# endif
-_GL_CXXALIASWARN (vfprintf);
-#endif
-#if !@GNULIB_VFPRINTF_POSIX@ && defined GNULIB_POSIXCHECK
-# if !GNULIB_overrides_vfprintf
-#  undef vfprintf
-# endif
-/* Assume vfprintf is always declared.  */
-_GL_WARN_ON_USE (vfprintf, "vfprintf is not always POSIX compliant - "
-                 "use gnulib module vfprintf-posix for portable "
-                      "POSIX compliance");
-#endif
 
 #if @GNULIB_VFSCANF@
 # if @REPLACE_STDIO_READ_FUNCS@ && @GNULIB_STDIO_H_NONBLOCKING@
@@ -1096,40 +981,6 @@ _GL_CXXALIAS_SYS (vfscanf, int,
 _GL_CXXALIASWARN (vfscanf);
 #endif
 
-#if @GNULIB_VPRINTF_POSIX@ || @GNULIB_VPRINTF@
-# if (@GNULIB_VPRINTF_POSIX@ && @REPLACE_VPRINTF@) \
-     || (@GNULIB_VPRINTF@ && @REPLACE_STDIO_WRITE_FUNCS@ && (@GNULIB_STDIO_H_NONBLOCKING@ || @GNULIB_STDIO_H_SIGPIPE@))
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   define vprintf rpl_vprintf
-#  endif
-#  define GNULIB_overrides_vprintf 1
-#  if @GNULIB_VPRINTF_POSIX@ || @GNULIB_VFPRINTF_POSIX@
-_GL_FUNCDECL_RPL (vprintf, int, (const char *format, va_list args)
-                                _GL_ATTRIBUTE_FORMAT_PRINTF (1, 0)
-                                _GL_ARG_NONNULL ((1)));
-#  else
-_GL_FUNCDECL_RPL (vprintf, int, (const char *format, va_list args)
-                                _GL_ATTRIBUTE_FORMAT_PRINTF_SYSTEM (1, 0)
-                                _GL_ARG_NONNULL ((1)));
-#  endif
-_GL_CXXALIAS_RPL (vprintf, int, (const char *format, va_list args));
-# else
-/* Need to cast, because on Solaris, the second parameter is
-                                                          __va_list args
-   and GCC's fixincludes did not change this to __gnuc_va_list.  */
-_GL_CXXALIAS_SYS_CAST (vprintf, int, (const char *format, va_list args));
-# endif
-_GL_CXXALIASWARN (vprintf);
-#endif
-#if !@GNULIB_VPRINTF_POSIX@ && defined GNULIB_POSIXCHECK
-# if !GNULIB_overrides_vprintf
-#  undef vprintf
-# endif
-/* Assume vprintf is always declared.  */
-_GL_WARN_ON_USE (vprintf, "vprintf is not always POSIX compliant - "
-                 "use gnulib module vprintf-posix for portable "
-                 "POSIX compliance");
-#endif
 
 #if @GNULIB_VSCANF@
 # if @REPLACE_STDIO_READ_FUNCS@ && @GNULIB_STDIO_H_NONBLOCKING@
