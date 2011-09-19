@@ -205,25 +205,6 @@ _GL_CXXALIAS_SYS (fgets, char *, (char *s, int n, FILE *stream));
 _GL_CXXALIASWARN (fgets);
 #endif
 
-#if @GNULIB_FOPEN@
-# if @REPLACE_FOPEN@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef fopen
-#   define fopen rpl_fopen
-#  endif
-_GL_FUNCDECL_RPL (fopen, FILE *, (const char *filename, const char *mode)
-                                 _GL_ARG_NONNULL ((1, 2)));
-_GL_CXXALIAS_RPL (fopen, FILE *, (const char *filename, const char *mode));
-# else
-_GL_CXXALIAS_SYS (fopen, FILE *, (const char *filename, const char *mode));
-# endif
-_GL_CXXALIASWARN (fopen);
-#elif defined GNULIB_POSIXCHECK
-# undef fopen
-/* Assume fopen is always declared.  */
-_GL_WARN_ON_USE (fopen, "fopen on Win32 platforms is not POSIX compatible - "
-                 "use gnulib module fopen for portability");
-#endif
 
 #if @GNULIB_FPRINTF_POSIX@ || @GNULIB_FPRINTF@
 # if (@GNULIB_FPRINTF_POSIX@ && @REPLACE_FPRINTF@) \
@@ -369,89 +350,6 @@ _GL_CXXALIAS_SYS (fscanf, int, (FILE *stream, const char *format, ...));
 _GL_CXXALIASWARN (fscanf);
 #endif
 
-
-/* Set up the following warnings, based on which modules are in use.
-   GNU Coding Standards discourage the use of fseek, since it imposes
-   an arbitrary limitation on some 32-bit hosts.  Remember that the
-   fseek module depends on the fseeko module, so we only have three
-   cases to consider:
-
-   1. The developer is not using either module.  Issue a warning under
-   GNULIB_POSIXCHECK for both functions, to remind them that both
-   functions have bugs on some systems.  _GL_NO_LARGE_FILES has no
-   impact on this warning.
-
-   2. The developer is using both modules.  They may be unaware of the
-   arbitrary limitations of fseek, so issue a warning under
-   GNULIB_POSIXCHECK.  On the other hand, they may be using both
-   modules intentionally, so the developer can define
-   _GL_NO_LARGE_FILES in the compilation units where the use of fseek
-   is safe, to silence the warning.
-
-   3. The developer is using the fseeko module, but not fseek.  Gnulib
-   guarantees that fseek will still work around platform bugs in that
-   case, but we presume that the developer is aware of the pitfalls of
-   fseek and was trying to avoid it, so issue a warning even when
-   GNULIB_POSIXCHECK is undefined.  Again, _GL_NO_LARGE_FILES can be
-   defined to silence the warning in particular compilation units.
-   In C++ compilations with GNULIB_NAMESPACE, in order to avoid that
-   fseek gets defined as a macro, it is recommended that the developer
-   uses the fseek module, even if he is not calling the fseek function.
-
-   Most gnulib clients that perform stream operations should fall into
-   category 3.  */
-
-#if @GNULIB_FSEEK@
-# if defined GNULIB_POSIXCHECK && !defined _GL_NO_LARGE_FILES
-#  define _GL_FSEEK_WARN /* Category 2, above.  */
-#  undef fseek
-# endif
-# if @REPLACE_FSEEK@
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef fseek
-#   define fseek rpl_fseek
-#  endif
-_GL_FUNCDECL_RPL (fseek, int, (FILE *fp, long offset, int whence)
-                              _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (fseek, int, (FILE *fp, long offset, int whence));
-# else
-_GL_CXXALIAS_SYS (fseek, int, (FILE *fp, long offset, int whence));
-# endif
-_GL_CXXALIASWARN (fseek);
-#endif
-
-#if @GNULIB_FSEEKO@
-# if !@GNULIB_FSEEK@ && !defined _GL_NO_LARGE_FILES
-#  define _GL_FSEEK_WARN /* Category 3, above.  */
-#  undef fseek
-# endif
-# if @REPLACE_FSEEKO@
-/* Provide an fseeko function that is aware of a preceding fflush(), and which
-   detects pipes.  */
-#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
-#   undef fseeko
-#   define fseeko rpl_fseeko
-#  endif
-_GL_FUNCDECL_RPL (fseeko, int, (FILE *fp, off_t offset, int whence)
-                               _GL_ARG_NONNULL ((1)));
-_GL_CXXALIAS_RPL (fseeko, int, (FILE *fp, off_t offset, int whence));
-# else
-#  if ! @HAVE_DECL_FSEEKO@
-_GL_FUNCDECL_SYS (fseeko, int, (FILE *fp, off_t offset, int whence)
-                               _GL_ARG_NONNULL ((1)));
-#  endif
-_GL_CXXALIAS_SYS (fseeko, int, (FILE *fp, off_t offset, int whence));
-# endif
-_GL_CXXALIASWARN (fseeko);
-#elif defined GNULIB_POSIXCHECK
-# define _GL_FSEEK_WARN /* Category 1, above.  */
-# undef fseek
-# undef fseeko
-# if HAVE_RAW_DECL_FSEEKO
-_GL_WARN_ON_USE (fseeko, "fseeko is unportable - "
-                 "use gnulib module fseeko for portability");
-# endif
-#endif
 
 #ifdef _GL_FSEEK_WARN
 # undef _GL_FSEEK_WARN
